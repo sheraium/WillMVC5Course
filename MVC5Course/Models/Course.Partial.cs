@@ -7,8 +7,16 @@ namespace MVC5Course.Models
     using System.ComponentModel.DataAnnotations;
     
     [MetadataType(typeof(CourseMetaData))]
-    public partial class Course
+    public partial class Course : IValidatableObject
     {
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (Credits <=3 && Title.Length >10)
+            {
+                yield return new ValidationResult("當 Creadits <= 3 時， 課程名稱的長度不能超過 10 個字元", new []{"Credits","Title"});
+
+            }
+        }
     }
     
     public partial class CourseMetaData

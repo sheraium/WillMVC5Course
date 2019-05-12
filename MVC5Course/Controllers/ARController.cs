@@ -23,5 +23,16 @@ namespace MVC5Course.Controllers
         {
             return Content("123456789");
         }
+
+        [Route("robos.txt")]
+        public ActionResult Robots()
+        {
+            return Content(@"User-agent: bingbot
+Disallow: /wp-admin/
+Disallow: ^test*
+
+sitemap: http://www.abc.com/sitemap.xml
+");
+        }
     }
 }

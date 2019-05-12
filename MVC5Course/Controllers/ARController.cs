@@ -20,7 +20,7 @@ namespace MVC5Course.Controllers
             return Content("123456789");
         }
 
-        [Route("robos.txt")]
+        [Route("robots.txt")]
         public ActionResult Robots()
         {
             return Content(@"User-agent: bingbot

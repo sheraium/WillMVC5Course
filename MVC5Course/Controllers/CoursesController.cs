@@ -7,7 +7,7 @@ using System.Web.Mvc;
 namespace MVC5Course.Controllers
 {
     [RoutePrefix("courses")]
-    public class CoursesController : Controller
+    public class CoursesController : BaseController
     {
         private CourseRepository courseRepo;
         private DepartmentRepository deptRepo;

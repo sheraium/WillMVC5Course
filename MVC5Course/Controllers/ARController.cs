@@ -18,5 +18,10 @@ namespace MVC5Course.Controllers
         {
             return PartialView();
         }
+
+        public ActionResult ContextTest()
+        {
+            return Content("123456789");
+        }
     }
 }

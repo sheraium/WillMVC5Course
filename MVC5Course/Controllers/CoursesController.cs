@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace MVC5Course.Controllers
 {
+    [RoutePrefix("courses")]
     public class CoursesController : Controller
     {
         private CourseRepository courseRepo;
@@ -18,6 +19,7 @@ namespace MVC5Course.Controllers
         }
 
         // GET: Courses
+        [Route("")]
         public ActionResult Index()
         {
             var courses = courseRepo.All();
@@ -25,6 +27,7 @@ namespace MVC5Course.Controllers
         }
 
         // GET: Courses/Details/5
+        [Route("{id}")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -40,6 +43,7 @@ namespace MVC5Course.Controllers
         }
 
         // GET: Courses/Create
+        [Route("create")]
         public ActionResult Create()
         {
             ViewBag.DepartmentID = new SelectList(deptRepo.All(), "DepartmentID", "Name");
@@ -51,6 +55,7 @@ namespace MVC5Course.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("create")]
         public ActionResult Create([Bind(Include = "CourseID,Title,Credits,DepartmentID,Location")] Course course)
         {
             if (ModelState.IsValid)
@@ -65,6 +70,7 @@ namespace MVC5Course.Controllers
         }
 
         // GET: Courses/Edit/5
+        [Route("edit/{id}")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -85,6 +91,7 @@ namespace MVC5Course.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("edit/{id}")]
         public ActionResult Edit([Bind(Include = "CourseID,Title,Credits,DepartmentID,Location")] Course course)
         {
             if (ModelState.IsValid)
@@ -98,6 +105,7 @@ namespace MVC5Course.Controllers
         }
 
         // GET: Courses/Delete/5
+        [Route("delete/{id}")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -115,6 +123,7 @@ namespace MVC5Course.Controllers
         // POST: Courses/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Route("delete/{id}")]
         public ActionResult DeleteConfirmed(int id)
         {
             Course course = courseRepo.Find(id);

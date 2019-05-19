@@ -1,3 +1,4 @@
+using System.Web.Mvc;
 using MVC5Course.DataTypeAttributes;
 
 namespace MVC5Course.Models
@@ -31,6 +32,7 @@ namespace MVC5Course.Models
         
         [驗證標題不允許出現特定文字(Words = new []{"Admin"})]
         [StringLength(50, ErrorMessage="欄位長度不得大於 50 個字元")]
+        [AllowHtml]
         public string Title { get; set; }
         [Required]
         [Range(1,5, ErrorMessage = "1~5")]

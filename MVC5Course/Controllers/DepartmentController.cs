@@ -14,7 +14,7 @@ namespace MVC5Course.Controllers
         [取得Department清單]
         public ActionResult Index()
         {
-            return View(ViewBag.DepartmentList.ToList());
+            return View(ViewBag.DepartmentList);
         }
 
         [HttpPost]
@@ -35,7 +35,7 @@ namespace MVC5Course.Controllers
                 return RedirectToAction("Index");
             }
 
-            return View(ViewBag.DepartmentList.ToList());
+            return View(ViewBag.DepartmentList);
         }
 
         public ActionResult Create()

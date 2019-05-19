@@ -9,16 +9,19 @@ namespace MVC5Course.ActionFilters
     {
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            var db = new ContosoUniversityEntities();
-            filterContext.Controller.ViewBag.DepartmentList
-                = from p in db.Departments
-                select new DepartmentCreationVM()
-                {
-                    DepartmentId = p.DepartmentID,
-                    Name = p.Name,
-                    Budget = p.Budget,
-                    StartDate = p.StartDate
-                };
+            using (var db = new ContosoUniversityEntities())
+            {
+                filterContext.Controller.ViewBag.DepartmentList
+                    = (from p in db.Departments
+                        select new DepartmentCreationVM()
+                        {
+                            DepartmentId = p.DepartmentID,
+                            Name = p.Name,
+                            Budget = p.Budget,
+                            StartDate = p.StartDate
+                        }).ToList();
+            }
+                
 
             base.OnActionExecuting(filterContext);
         }

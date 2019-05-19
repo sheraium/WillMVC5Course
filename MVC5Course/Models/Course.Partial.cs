@@ -7,7 +7,7 @@ namespace MVC5Course.Models
     using System.ComponentModel.DataAnnotations;
     
     [MetadataType(typeof(CourseMetaData))]
-    public partial class Course : IValidatableObject
+    public partial class Course : IValidatableObject, IEditCourse
     {
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
@@ -18,7 +18,12 @@ namespace MVC5Course.Models
             }
         }
     }
-    
+    public interface IEditCourse
+    {
+        int CourseID { get; set; }
+        string Title { get; set; }
+        int Credits { get; set; }
+    }
     public partial class CourseMetaData
     {
         [Required]

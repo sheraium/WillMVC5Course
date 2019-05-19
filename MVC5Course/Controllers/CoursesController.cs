@@ -1,4 +1,5 @@
-﻿using MVC5Course.Models;
+﻿using System;
+using MVC5Course.Models;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
@@ -92,14 +93,20 @@ namespace MVC5Course.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("edit/{id}")]
-        public ActionResult Edit([Bind(Include = "CourseID,Title,Credits,DepartmentID,Location")] Course course)
+        public ActionResult Edit(int id, FormCollection form)
         {
-            if (ModelState.IsValid)
+            var course = courseRepo.Find(id);
+            if (TryUpdateModel<IEditCourse>(course))
             {
-                courseRepo.UnitOfWork.Context.Entry(course).State = EntityState.Modified;
                 courseRepo.UnitOfWork.Commit();
                 return RedirectToAction("Index");
             }
+            //if (ModelState.IsValid)
+            //{
+            //    courseRepo.UnitOfWork.Context.Entry(course).State = EntityState.Modified;
+            //    courseRepo.UnitOfWork.Commit();
+            //    return RedirectToAction("Index");
+            //}
             ViewBag.DepartmentID = new SelectList(deptRepo.All(), "DepartmentID", "Name", course.DepartmentID);
             return View(course);
         }
@@ -141,4 +148,6 @@ namespace MVC5Course.Controllers
             base.Dispose(disposing);
         }
     }
+
+   
 }

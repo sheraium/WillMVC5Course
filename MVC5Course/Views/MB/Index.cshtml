@@ -1,0 +1,22 @@
+﻿@model string
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<hr />
+@ViewData["key1"]
+@ViewBag.key1
+<hr/>
+@ViewData["key2"]
+@ViewBag.key2
+<hr />
+@TempData["key3"]
+<hr />
+@Model
+<br />
+@this.Model
+<br />
+@ViewData.Model

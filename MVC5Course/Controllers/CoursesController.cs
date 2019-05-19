@@ -1,4 +1,5 @@
-﻿using MVC5Course.Models;
+﻿using System;
+using MVC5Course.Models;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
@@ -71,6 +72,7 @@ namespace MVC5Course.Controllers
 
         // GET: Courses/Edit/5
         [Route("edit/{id}")]
+        [ValidateInput(false)]
         public ActionResult Edit(int? id)
         {
             if (id == null)

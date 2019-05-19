@@ -52,5 +52,21 @@ namespace MVC5Course.Controllers
             //ModelState.AddModelError("Budget", "My ERROR");
             return View(form);
         }
+
+        public ActionResult Test2()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Test2(MyVM data)
+        {
+            if (ModelState.IsValid)
+            {
+                return RedirectToAction("Index");
+            }
+
+            return View(data);
+        }
     }
 }

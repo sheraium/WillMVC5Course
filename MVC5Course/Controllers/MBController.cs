@@ -26,5 +26,16 @@ namespace MVC5Course.Controllers
 
             return RedirectToAction("Index");
         }
+
+        public ActionResult Test()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Test(FormCollection form)
+        {
+            return Content(form["Name"]);
+        }
     }
 }

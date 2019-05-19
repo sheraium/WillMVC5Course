@@ -43,5 +43,16 @@ sitemap: http://www.abc.com/sitemap.xml
                 return File(file, "image/jpeg", "Download.jpg");
             }
         }
+
+        [OutputCache(NoStore = true, Duration = 0)]
+        public ActionResult JsonTest()
+        {
+            return Json(new
+            {
+                ID = 1,
+                Name = "Will",
+            }, JsonRequestBehavior.AllowGet);
+        }
+
     }
 }

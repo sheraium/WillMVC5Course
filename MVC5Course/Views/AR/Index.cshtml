@@ -3,7 +3,16 @@
 }
 
 <h2>Index</h2>
+<button type="button" onclick="getData()">取得Json資料</button>
+<br/>
 <a href="@Url.Action("FileTest", "AR")">
 
     <img src="@Url.Action("FileTest", "AR")" width="100" height="100"/>
 </a>
+<script>
+    function getData() {
+        $.get('@Url.Action("JsonTest", "AR")', function (data) {
+            console.log(data);
+        });
+    }
+</script>

@@ -14,10 +14,38 @@ namespace MVC5Course.Controllers
         {
             return View(db.Departments.Select(d => new DepartmentCreationVM()
             {
+                DepartmentId = d.DepartmentID,
                 Budget = d.Budget,
                 Name = d.Name,
                 StartDate = d.StartDate,
             }));
+        }
+
+        [HttpPost]
+        public ActionResult Index(DepartmentBatchUpdateVM[] data)
+        {
+            if (ModelState.IsValid)
+            {
+                foreach (var item in data)
+                {
+                    var dept = db.Departments.Find(item.DepartmentId);
+                    dept.Name = item.Name;
+                    dept.Budget = item.Budget;
+                }
+
+                db.SaveChanges();
+
+                return RedirectToAction("Index");
+            }
+
+            return View(from p in db.Departments
+                        select new DepartmentCreationVM()
+                        {
+                            DepartmentId = p.DepartmentID,
+                            Name = p.Name,
+                            Budget = p.Budget,
+                            StartDate = p.StartDate
+                        });
         }
 
         public ActionResult Create()

@@ -96,7 +96,7 @@ namespace MVC5Course.Controllers
         public ActionResult Edit(int id, FormCollection form)
         {
             var course = courseRepo.Find(id);
-            if (TryUpdateModel<IEditCourse>(course))
+            if (TryUpdateModel<IEditCourse>(course) && TryValidateModel(course))
             {
                 courseRepo.UnitOfWork.Commit();
                 return RedirectToAction("Index");

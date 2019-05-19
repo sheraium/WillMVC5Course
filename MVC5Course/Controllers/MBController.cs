@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using MVC5Course.ViewModels;
 
 namespace MVC5Course.Controllers
 {
@@ -33,9 +34,13 @@ namespace MVC5Course.Controllers
         }
 
         [HttpPost]
-        public ActionResult Test(FormCollection form)
+        public ActionResult Test(DepartmentCreationVM form)
         {
-            return Content(form["Name"]);
+            if (ModelState.IsValid)
+            {
+                return RedirectToAction("Index");
+            }
+            return View(form);
         }
     }
 }

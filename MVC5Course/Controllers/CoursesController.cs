@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
+using MVC5Course.ActionFilters;
 
 namespace MVC5Course.Controllers
 {
@@ -137,10 +138,7 @@ namespace MVC5Course.Controllers
             return RedirectToAction("Index");
         }
 
-#if !DEBUG
-        [NonAction]
-#endif
-
+        [LocalOnly]
         [OutputCache(NoStore = true, Duration = 0)]
         [Route("debug")]
         public ActionResult Debug()

@@ -8,6 +8,7 @@ using MVC5Course.ActionFilters;
 namespace MVC5Course.Controllers
 {
     [RoutePrefix("courses")]
+    [HandleError(View = "Error.ArgumentException", ExceptionType = typeof(ArgumentException))]
     public class CoursesController : BaseController
     {
         private CourseRepository courseRepo;

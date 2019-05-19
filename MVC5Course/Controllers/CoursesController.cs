@@ -1,6 +1,4 @@
-﻿using System;
-using MVC5Course.Models;
-using System.Data.Entity;
+﻿using MVC5Course.Models;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
@@ -139,6 +137,17 @@ namespace MVC5Course.Controllers
             return RedirectToAction("Index");
         }
 
+#if !DEBUG
+        [NonAction]
+#endif
+
+        [OutputCache(NoStore = true, Duration = 0)]
+        [Route("debug")]
+        public ActionResult Debug()
+        {
+            return Json(new { OK = 1 }, JsonRequestBehavior.AllowGet);
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -148,6 +157,4 @@ namespace MVC5Course.Controllers
             base.Dispose(disposing);
         }
     }
-
-   
 }

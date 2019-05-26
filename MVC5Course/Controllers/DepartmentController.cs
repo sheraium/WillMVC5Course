@@ -61,5 +61,16 @@ namespace MVC5Course.Controllers
 
             return View(data);
         }
+
+        public ActionResult Detail(int? id)
+        {
+            if (!id.HasValue)
+            {
+                return HttpNotFound();
+            }
+
+            var dept = db.Departments.Find(id.Value);
+            return View(dept);
+        }
     }
 }

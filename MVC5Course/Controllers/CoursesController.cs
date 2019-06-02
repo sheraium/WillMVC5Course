@@ -166,5 +166,11 @@ namespace MVC5Course.Controllers
             }
             base.Dispose(disposing);
         }
+
+        [Route("GetTime")]
+        public ActionResult GetTime()
+        {
+            return Content(DateTime.Now.ToString());
+        }
     }
 }

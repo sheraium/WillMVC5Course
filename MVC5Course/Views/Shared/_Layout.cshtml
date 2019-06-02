@@ -29,7 +29,9 @@
         </div>
     </div>
     <div class="container body-content">
-        @RenderBody()
+        <section class="content-wrapper main-content clear-fix" id="Main">
+            @RenderBody()
+        </section>
         <hr />
         <footer>
             <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>

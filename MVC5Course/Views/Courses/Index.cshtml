@@ -1,9 +1,11 @@
 ﻿@using X.PagedList
 @using X.PagedList.Mvc
+@using X.PagedList.Mvc.Common
 @model IEnumerable<MVC5Course.Models.Course>
 
 @{
     ViewBag.Title = "Index";
+    if (IsAjax) { Layout = ""; }
 }
 
 @section Scripts {
@@ -69,6 +71,10 @@
 
 </table>
 
-@Html.PagedListPager(Model as IPagedList, (p) => Url.Action("Index", new { pageNo = p }))
+@{
+    var pagedList = Model as IPagedList;
+}
+@Html.PagedListPager(pagedList, (p) => Url.Action("Index", new { pageNo = p, pageSize = pagedList.PageSize }),
+        PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing("#Main"))
 
 <div id="details"></div>

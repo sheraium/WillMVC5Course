@@ -12,12 +12,22 @@
         @($"{i} ")
     }
     @:
-<ul>
+    <ul>
         @foreach (var i in data)
         {
-  <li>@i</li>
+            <li>@i</li>
         }
-</ul>
+    </ul>
 }
 
 <a href="@HttpUtility.UrlPathEncode("/Ho me/Index")?q=@Url.Encode("多 奇/123")">123</a>
+
+@{
+    ViewBag.Message = @"123<>
+456
+789";
+}
+
+<script>
+    console.log('@Ajax.JavaScriptStringEncode(ViewBag.Message)');
+</script> 

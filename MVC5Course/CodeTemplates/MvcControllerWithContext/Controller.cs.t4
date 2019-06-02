@@ -46,6 +46,7 @@ using System.Web.Mvc;
 <# foreach (var namespaceName in RequiredNamespaces) { #>
 using <#= namespaceName #>;
 <# } #>
+using X.PagedList;
 
 namespace <#= Namespace #>
 {
@@ -77,20 +78,20 @@ namespace <#= Namespace #>
 
         // GET: <#= routePrefix #>
 <# if (UseAsync) { #>
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(int pageNo = 1)
 <# } else { #>
-        public ActionResult Index()
+       public ActionResult Index(int pageNo = 1)
 <# } #>
         {
 <#  var includeExpressions = "";
         includeExpressions = String.Join("", relatedProperties.Values.Select(property => String.Format(".Include({0} => {0}.{1})", lambdaVar, property.AssociationPropertyName)));
 #>
 <# if(!String.IsNullOrEmpty(includeExpressions)) { #>
-            var <#= entitySetVar #> = db.<#= entitySetName #><#= includeExpressions #>;
+           var <#= entitySetVar #> = db.<#= entitySetName #>.OrderBy(p => p.<#=primaryKeyName#>).ToPagedList(pageNo, 1);
 <#		if (UseAsync) { #>
             return View(await <#= entitySetVar #>.ToListAsync());
 <#		} else { #>
-            return View(<#= entitySetVar #>.ToList());
+           return View(db.<#= entitySetName #><#= includeExpressions #>.OrderBy(p => p.<#=primaryKeyName#>).ToPagedList(pageNo, 1));
 <#		} #>
 <# } else { #>
 <#		if (UseAsync) { #>

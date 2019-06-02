@@ -10,6 +10,11 @@ namespace MVC5Course.Models
         {
             return All().FirstOrDefault(c => c.CourseID == id);
         }
+
+        public override IQueryable<Course> All()
+        {
+            return base.All().Where(p => p.Credits >= 1).OrderBy(p => p.CourseID);
+        }
     }
 
 	public  interface ICourseRepository : IRepository<Course>
